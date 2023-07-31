@@ -1,5 +1,5 @@
 
-import { Hero } from "@components/common"
+import { Hero } from "@components/ui/common"
 import { CourseList } from "@components/course"
 import { BaseLayout } from "@components/layout"
 import {getAllCourse} from "@content/courses/fetcher"
