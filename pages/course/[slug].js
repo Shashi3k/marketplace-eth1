@@ -3,8 +3,8 @@ import {
   CourseHero,
   Curriculum,
   Keypoints
-} from "@components/course";
-import { BaseLayout } from "@components/layout";
+} from "@components/ui/course";
+import { BaseLayout } from "@components/ui/layout";
 import { getAllCourse } from "@content/courses/fetcher";
 
 export default function Course({course}) {

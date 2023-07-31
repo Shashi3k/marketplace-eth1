@@ -1,3 +1,4 @@
+
 import { Navbar, Footer } from "@components/ui/common"
 
 export default function BaseLayout({children}) {
@@ -10,6 +11,6 @@ export default function BaseLayout({children}) {
         </div>
       </div>
       <Footer />
-    </>
+      </>
   )
 }
