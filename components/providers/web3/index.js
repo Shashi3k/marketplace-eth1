@@ -2,6 +2,8 @@ const { createContext, useContext, useState, useEffect, useMemo } = require("rea
 
 import detectEthereumProvider from "@metamask/detect-provider";
 import Web3 from "web3";
+import { setupHooks } from "./hooks/setupHooks";
+
 
 const Web3Context = createContext(Web3)
 
@@ -39,13 +41,15 @@ export default function Web3Provider({children}){
     },[])
 
     const _web3Api=useMemo(()=>{
+        const {web3, provider}=web3Api
         return{
             ...web3Api,
-            isWeb3Loaded:web3Api.web3!=null,
-            connect:web3Api.provider?
+            isWeb3Loaded:web3!=null,
+            getHooks:() => setupHooks(web3,provider),
+            connect:provider?
             async ()=>{
                 try{
-                    await web3Api.provider.request({method:"eth_requestAccounts"})
+                    await provider.request({method:"eth_requestAccounts"})
                 }
                 catch{
                     location.reload()
@@ -61,6 +65,11 @@ export default function Web3Provider({children}){
             {children}
         </Web3Context.Provider>
     )
+}
+
+export function useHooks(cb){
+    const {getHooks}=useWeb3()
+    return cb(getHooks())
 }
 
 export function useWeb3(){
