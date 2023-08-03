@@ -12,9 +12,16 @@ module.exports = {
     extend: {
       maxWidth: {
         "8xl": "1920px",
-        opacity:["disabled"],
-        cursor:["disabled"]
       },
+      flex:{
+      "2": "2 2 0%",
+    },
+    },
+  },
+  variants: {
+    extend: {
+      opacity: ["disabled"],
+      cursor: ["disabled"],
     },
   },
   plugins: [],

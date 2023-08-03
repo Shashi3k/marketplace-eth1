@@ -1,6 +1,6 @@
 
-import { Hero } from "@components/ui/common"
-import { CourseList } from "@components/ui/course"
+import { Footer, Hero } from "@components/ui/common"
+import { CourseCard, CourseList } from "@components/ui/course"
 import { BaseLayout } from "@components/ui/layout"
 import {getAllCourse} from "@content/courses/fetcher"
 
@@ -11,7 +11,14 @@ export default function Home({courses}) {
     <BaseLayout>
       <Hero />
       <CourseList 
-      courses={courses}/>
+      courses={courses}>
+        {course=>
+        <CourseCard 
+        key={course.id}
+        course={course}
+        />
+        }
+      </CourseList>
     </BaseLayout>
     </>
   )

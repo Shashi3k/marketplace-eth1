@@ -24,9 +24,8 @@ export const handler = (web3,provider)=>()=>{
     },[provider])
 
     return {
-        account:{
             data,
             isAdmin:(data && isAdminAddress[web3.utils.keccak256(data)]) ?? false,
             mutate,
-        ...rest}}
+        ...rest}
 }
