@@ -3,14 +3,15 @@ import Image from "next/legacy/image";
 
 
 
-export default function Card({course, Footer}){
+export default function Card({course,disabled, Footer}){
 
     return (
         <div key={course.index} className="bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
           <div className="flex h-full">
             <div className="flex-1 h-full next-image-wrapper">
               <Image 
-               src={course.coverImage}
+                className={`object-cover ${disabled && "filter grayscale"}`}
+                src={course.coverImage}
                 alt={course.title}
                 height="230"
                 width="200"

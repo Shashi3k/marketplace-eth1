@@ -1,9 +1,12 @@
+import { useEthPrice } from "@components/hooks/useEthPrice"
 import Image from "next/image"
 
-export default function EthRates({eth, ethPerItem}) {
+export default function EthRates() {
+
+  const {eth} = useEthPrice()
 
   return (
-    <div className="grid grid-cols-4 mb-5">
+    <div className="grid grid-cols-4 ">
       <div className="flex flex-1 items-stretch text-center">
         <div className="p-10 border drop-shadow rounded-md">
           <div className="flex items-center">
@@ -15,7 +18,7 @@ export default function EthRates({eth, ethPerItem}) {
               src="/ether.png"
             />
             <span className="text-2xl font-bold">
-               = {eth}$
+               = {eth.data}$
             </span>
           </div>
           <p className="text-xl text-gray-500">Current eth Price</p>
@@ -25,7 +28,7 @@ export default function EthRates({eth, ethPerItem}) {
         <div className="p-10 border drop-shadow rounded-md">
           <div className="flex items-center">
             <span className="text-2xl font-bold">
-              {ethPerItem}
+              {eth.ethPerItem}
             </span>
             <Image
               layout="fixed"

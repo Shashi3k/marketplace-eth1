@@ -1,46 +1,33 @@
 import { CourseCard, CourseList } from "@components/ui/course"
-import { EthRates, WalletBar } from "@components/ui/web3"
 import { getAllCourse } from "@content/courses/fetcher"
 import { BaseLayout as MarketplaceLayout } from "@components/ui/layout"
-import { useAccount, useNetwork } from "@components/hooks/web3"
-import { Button } from "@components/ui/common"
+import {  Button } from "@components/ui/common"
 import { OrderModal } from "@components/ui/order"
 import { useState } from "react"
-import { useEthPrice } from "@components/hooks/useEthPrice"
+import { useWalletInfo } from "@components/hooks/web3"
+import {MarketHeader} from "@components/ui/Marketplace"
 
 
 export default function Marketplace({courses}){
 
-    const {account} =useAccount()
-    const {network} =useNetwork()
-    const {eth,perItem} =useEthPrice()
     const [selectedCourse, setselectedCourse]=useState(null)
+    const {  canPurchaseCourse}=useWalletInfo()
 
     return (
         <>
         <MarketplaceLayout>
-        <div className="py-4">
-        <WalletBar 
-            address={account.data} 
-            network={
-                {data:network.data,
-                target:network.target,
-            isSupported:network.isSupported,
-            hasInitialResponse:network.hasInitialResponse
-        }
-            }
-        />
-        <EthRates eth={eth.data}
-         ethPerItem={eth.perItem}/>
+            <div >
+        <MarketHeader />
         </div>
         <CourseList courses={courses} >
             {course=>
             <CourseCard 
             key={course.id}
             course={course}
+            disabled={!canPurchaseCourse}
             Footer={()=>
                 <div className="mt-4">
-                <Button onClick={()=> setselectedCourse(course)} variant="green">
+                <Button onClick={()=> setselectedCourse(course)} disabled={!canPurchaseCourse} variant="green">
                     Purchase
                 </Button>
                 </div>
