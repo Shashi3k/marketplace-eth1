@@ -12,6 +12,9 @@ export default function Marketplace({courses}){
 
     const [selectedCourse, setselectedCourse]=useState(null)
     const {  canPurchaseCourse}=useWalletInfo()
+    const purchaseCourse = (order) => {
+        alert(JSON.stringify(order))
+      }
 
     return (
         <>
@@ -24,10 +27,10 @@ export default function Marketplace({courses}){
             <CourseCard 
             key={course.id}
             course={course}
-            disabled={!canPurchaseCourse}
+            disabled={canPurchaseCourse}
             Footer={()=>
                 <div className="mt-4">
-                <Button onClick={()=> setselectedCourse(course)} disabled={!canPurchaseCourse} variant="green">
+                <Button onClick={()=> setselectedCourse(course)} disabled={canPurchaseCourse} variant="green">
                     Purchase
                 </Button>
                 </div>
@@ -39,6 +42,7 @@ export default function Marketplace({courses}){
             <OrderModal 
                 course={selectedCourse}
                 onClose={()=>setselectedCourse(null)}
+                nSubmit={purchaseCourse}
             />}
         </MarketplaceLayout>
         </>
