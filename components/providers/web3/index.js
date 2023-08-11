@@ -3,6 +3,7 @@ const { createContext, useContext, useState, useEffect, useMemo } = require("rea
 import detectEthereumProvider from "@metamask/detect-provider";
 import Web3 from "web3";
 import { setupHooks } from "./hooks/setupHooks";
+import { loadContract } from "@utils/loadContract";
 
 
 const Web3Context = createContext(Web3)
@@ -24,13 +25,15 @@ export default function Web3Provider({children}){
         const loadProvider= async ()=>{
 
             const provider=await detectEthereumProvider()
-            const web3=new Web3(provider)
+            
 
             if (provider){
+                const web3=new Web3(provider)
+                const contract=loadContract("CourseMarketPlace",provider)
                 setWeb3Api(
                     {web3,
                     provider,
-                    contract:null,
+                    contract,
                     isLoading:false,
                     hooks:setupHooks(web3,provider)
                 }
