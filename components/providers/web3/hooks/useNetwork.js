@@ -38,7 +38,7 @@ export const handler=(web3,provider)=>()=>{
         data,
         mutate,
         target:targetNetwork,
-        isSupported: data===targetNetwork,
+        isSupported: (data===targetNetwork),
         ...rest
         
     }

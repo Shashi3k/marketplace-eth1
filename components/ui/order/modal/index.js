@@ -24,7 +24,7 @@ const defaultOrder=
     else if (!hasAgreedTOS){
       return _createFormState(true,"You need to agree with terms of service in order to submit the form")
     }
-    return _createFormState(true, "")
+    return _createFormState(false, "")
   }
 
 export default function OrderModal({course,onClose,onSubmit}) {
@@ -162,7 +162,7 @@ export default function OrderModal({course,onClose,onSubmit}) {
         </div>
         <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex">
         <div className=" pr-4 pb-5">
-            <Button disabled={FormState.isDisabled} 
+            <Button disabled={createFormState.isDisabled}
             onClick={()=>{
               onSubmit(order)
             }}>
