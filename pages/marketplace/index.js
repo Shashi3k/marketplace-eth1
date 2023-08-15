@@ -20,8 +20,8 @@ export default function Marketplace({courses}){
         console.log(hexCourseId)
 
         const orderHash = web3.utils.soliditySha3(
-            {type: "bytes16", value:hexCourseId?hexCourseId:""},
-            {type:"address", value: account.data?account.data:""}
+            {type: "bytes16", value:hexCourseId},
+            {type:"address", value: account.data}
         )
 
         console.log(orderHash)
@@ -31,13 +31,13 @@ export default function Marketplace({courses}){
         console.log(emailHash)
 
         const proof=web3.utils.soliditySha3(
-            {type:"btes32", value:orderHash?orderHash:""},
-            {type:"bytes32", value:emailHash?emailHash:""}
+            {type:"btes32", value:orderHash},
+            {type:"bytes32", value:emailHash}
         )
 
         console.log(proof)
 
-        const value = web3.utils.toWei(String(order.price))
+        const value = web3.utils.toWei(String(order.price),"ether")
 
         try{
             const result = await contract.methods.purchaseCourse(
